@@ -167,7 +167,7 @@ pip-log.txt
 ## Stuff
 #############
 tools/FAKE
-tools/NUbit.Runners
+tools/NUnit.Runners
 nuget/*
 build/*
 
