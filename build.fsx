@@ -10,7 +10,7 @@ let buildDir = "./build/"
 let testDir  = "./test/"
 let nugetDir = "./nuget/output/"
 let packagingDir = "./nuget/working/"
-let version = "1.0.0.0"
+let version = environVarOrDefault "VERSION" "1.0.0.0"
 let projectDescription = "IPasswordHasher implementation for Asp.Net Identity"
 let projectName = "Malt.PasswordHasher"
 
