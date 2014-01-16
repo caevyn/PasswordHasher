@@ -17,6 +17,7 @@ let projectName = "Malt.PasswordHasher"
 Target "Clean" (fun _ ->
     CleanDir buildDir
     CleanDir "./nuget"
+    CleanDir "./test"
 )
 
 Target "AssemblyInfo" (fun _ ->
