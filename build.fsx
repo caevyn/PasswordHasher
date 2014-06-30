@@ -10,6 +10,7 @@ let buildDir = "./build/"
 let testDir  = "./test/"
 let nugetDir = "./nuget/output/"
 let packagingDir = "./nuget/working/"
+let packageVersion = environVarOrDefault "PACKAGEVERSION" "1.0.0"
 let version = environVarOrDefault "VERSION" "1.0.0.0"
 let projectDescription = "IPasswordHasher implementation for Asp.Net Identity"
 let projectName = "Malt.PasswordHasher"
@@ -66,7 +67,7 @@ Target "CreatePackage" (fun _ ->
             OutputPath = nugetDir
             Summary = "Asp.Net Identity PBKDF2 IPasswordHasher"
             WorkingDir = packagingDir
-            Version = version
+            Version = packageVersion
             Dependencies =
              ["CryptSharp",  GetPackageVersion "./packages/" "CryptSharp"
               "Microsoft.AspNet.Identity.Core", GetPackageVersion "./packages/" "Microsoft.AspNet.Identity.Core"]
