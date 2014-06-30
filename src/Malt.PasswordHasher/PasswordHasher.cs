@@ -67,7 +67,7 @@ namespace Malt.PasswordHasher
                 return PasswordVerificationResult.Failed;
             }
             var hashAndSalt = parts[1];
-            bool isEqual = Crypto.VerifyHashedPassword<HMACSHA512>(hashAndSalt, providedPassword, iterations);
+            bool isEqual = Crypto.VerifyHashedPassword<T>(hashAndSalt, providedPassword, iterations);
             if(!isEqual)
             {
                 return PasswordVerificationResult.Failed;
