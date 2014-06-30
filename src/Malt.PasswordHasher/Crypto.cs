@@ -32,7 +32,7 @@ namespace Malt.PasswordHasher
         public static string HashPassword<T>(string password, int iterations) where T : KeyedHashAlgorithm, new()
         {
             var saltBytes = GenerateSalt();
-            var hashBytes = HashWithPbfdk2<T>(password, saltBytes, iterations);
+            var hashBytes = HashWithPbkdf2<T>(password, saltBytes, iterations);
             var combinedBytes = new byte[hashBytes.Length + saltBytes.Length];
             Buffer.BlockCopy(saltBytes, 0, combinedBytes, 0, saltBytes.Length);
             Buffer.BlockCopy(hashBytes, 0, combinedBytes, saltBytes.Length, hashBytes.Length);
@@ -40,7 +40,7 @@ namespace Malt.PasswordHasher
             return saltAndHash;
         }
 
-        public static byte[] HashWithPbfdk2<T>(string password, byte[] saltBytes, int iterations) where T : KeyedHashAlgorithm, new()
+        public static byte[] HashWithPbkdf2<T>(string password, byte[] saltBytes, int iterations) where T : KeyedHashAlgorithm, new()
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             
@@ -83,7 +83,7 @@ namespace Malt.PasswordHasher
             var storedSubkey = new byte[hashSize];
             Buffer.BlockCopy(hashedPasswordBytes, SaltSize, storedSubkey, 0, hashSize);
 
-            var generatedSubkey = HashWithPbfdk2<T>(password, salt, iterations);
+            var generatedSubkey = HashWithPbkdf2<T>(password, salt, iterations);
             return ByteArraysEqual(storedSubkey, generatedSubkey);
         }
 

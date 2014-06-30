@@ -26,7 +26,7 @@ namespace Malt.PasswordHasher.Test
         {
             var salt = Crypto.GenerateSalt();
             //cryptsharp
-            var customHash = Crypto.HashWithPbfdk2<HMACSHA1>("Cats", salt, 1000);
+            var customHash = Crypto.HashWithPbkdf2<HMACSHA1>("Cats", salt, 1000);
 
             //ms
             byte[] msHash;
