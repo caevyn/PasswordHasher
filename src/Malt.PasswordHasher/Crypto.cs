@@ -44,7 +44,7 @@ namespace Malt.PasswordHasher
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
 
-            KeyedHashAlgorithm algorith = new T();
+            KeyedHashAlgorithm algorith = new T() { Key = passwordBytes };
             var hashSize = algorith.HashSize/8;
 
             return Pbkdf2.ComputeDerivedKey(algorith, saltBytes, iterations, hashSize);
