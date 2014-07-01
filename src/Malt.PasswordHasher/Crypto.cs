@@ -43,11 +43,9 @@ namespace Malt.PasswordHasher
         public static byte[] HashWithPbkdf2<T>(string password, byte[] saltBytes, int iterations) where T : KeyedHashAlgorithm, new()
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
-            
-            var hashSize = new T().HashSize/8;
-            var hashedPassword = new byte[hashSize];
-
-            Pbkdf2.ComputeKey(passwordBytes, saltBytes, iterations, Pbkdf2.CallbackFromHmac<T>(), hashSize, hashedPassword);
+            var algorithm = new T() {Key = passwordBytes};
+            var hashSize = algorithm.HashSize / 8;
+            var hashedPassword = Pbkdf2.ComputeDerivedKey(algorithm, saltBytes, iterations, hashSize);
             return hashedPassword;
         }
 
